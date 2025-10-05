@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Bookmark</title>
+    <!-- ===== Fonts ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&family=Pacifico&family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ===== favicon ===== -->
+    <link rel="icon" href="./bookmark.png" />
+    <!-- ===== Font Awesome ===== -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <!-- ===== Bootstrap ===== -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <!-- ===== Main Style sheet ===== -->
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <main class="min-vh-100 py-5 position-relative">
+      <section
+        class="container d-flex flex-column justify-content-center align-items-center px-3 px-md-5"
+      >
+        <h1 class="py-2 position-relative">Bookmarker</h1>
+        <div
+          class="bookmark-body w-100 w-md-75 w-lg-50 p-3 py-4 mt-5 d-flex flex-column justify-content-center align-items-center gap-4"
+        >
+          <h2>
+            <i class="fa-solid fa-bookmark me-1"></i>
+            Bookmark your favorite sites
+            <i class="fa-solid fa-bookmark ms-1"></i>
+          </h2>
+          <div
+            class="site-name w-100 d-flex flex-column justify-content-center"
+          >
+            <label for="bookmarkName" class="pb-2 fw-semibold">
+              <i class="fa-solid fa-book-bookmark me-2"></i>
+              Site Name
+            </label>
+            <input
+              type="text"
+              placeholder="Bookmark Name"
+              class="form-control"
+              id="bookmarkName"
+            />
+          </div>
+          <div class="site-url w-100 d-flex flex-column justify-content-center">
+            <label for="bookmarkURL" class="pb-2 fw-semibold">
+              <i class="fa-solid fa-link me-2"></i>Site URL</label
+            >
+            <input
+              type="url"
+              placeholder="Website URL"
+              class="form-control"
+              id="bookmarkURL"
+            />
+          </div>
+          <button
+            onclick="addBookmark()"
+            class="btn btn-success px-5"
+            id="addBtn"
+          >
+            Submit
+          </button>
+        </div>
+        <div class="table-responsive w-100 mt-4">
+          <table class="table mt-4 text-center bg-light">
+            <thead>
+              <th>Index</th>
+              <th>Website Name</th>
+              <th>Visit</th>
+              <th>Delete</th>
+            </thead>
+            <tbody id="tableContent"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="js/main.js"></script>
+  </body>
+</html>
