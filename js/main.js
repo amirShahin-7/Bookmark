@@ -2,7 +2,6 @@ var siteNameInput = document.getElementById("bookmarkName");
 var siteUrlInput = document.getElementById("bookmarkURL");
 var tableContent = document.getElementById("tableContent");
 
-
 var bookmarkList = [];
 
 if (localStorage.getItem("bookmarks") !== null) {
@@ -11,29 +10,77 @@ if (localStorage.getItem("bookmarks") !== null) {
 }
 
 function addBookmark() {
+  var siteName = siteNameInput.value;
+  var siteUrl = siteUrlInput.value.trim();
+
+  if (siteName === "" || siteUrl === "") {
+    Swal.fire({
+      icon: "error",
+      title:
+        "<h5>Site Name or Url is not valid, Please follow the rules below :</h5>",
+      html: `<h6>Site name must contain at least 3 characters</h6>
+        <h6>Site URL must be a valid one</h6>`,
+    });
+    return;
+  } else {
+    Swal.fire({
+      icon: "success",
+      title: "Your Bookmark has been saved",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+  if (!isValidName(siteName)) {
+    Swal.fire({
+      icon: "error",
+      title: "<h5>The site name must contain 3 or more characters.</h5>",
+    });
+
+    return;
+  }
+  if (!isValidURL(siteUrl)) {
+    Swal.fire({
+      icon: "error",
+      title: "<h5>Please enter a valid URL (https://example.com)</h5>",
+    });
+
+    return;
+  }
   var bookmark = {
-    name: siteNameInput.value,
-    url: siteUrlInput.value.trim(),
+    name: siteName,
+    url: siteUrl,
   };
-  if (bookmark.name === "" || bookmark.url === "") {
-    alert("Please Inter All Data");
-    return;
-  }
-
-  if (!isValidURL(bookmark.url)) {
-    alert("Please enter a valid URL (https://example.com)");
-    return;
-  }
-
   bookmarkList.push(bookmark);
   localStorage.setItem("bookmarks", JSON.stringify(bookmarkList));
   displayBookmarks();
   clearInputs();
 }
 
-function isValidURL(url) {
-  var pattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\S*)$/;
-  return pattern.test(url);
+function isValidURL(value) {
+  var pattern =
+    /https:\/\/(www\.)[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+  var isValid = pattern.test(value);
+  if (isValid) {
+    siteUrlInput.classList.remove("is-invalid");
+    siteUrlInput.classList.add("is-valid");
+  } else {
+    siteUrlInput.classList.add("is-invalid");
+    siteUrlInput.classList.remove("is-valid");
+  }
+  return isValid;
+}
+
+function isValidName(value) {
+  var pattern = /^[A-Za-z]{3,}$/;
+  var isValid = pattern.test(value);
+  if (isValid) {
+    siteNameInput.classList.remove("is-invalid");
+    siteNameInput.classList.add("is-valid");
+  } else {
+    siteNameInput.classList.add("is-invalid");
+    siteNameInput.classList.remove("is-valid");
+  }
+  return isValid;
 }
 
 function displayBookmarks() {
@@ -64,6 +111,8 @@ function displayBookmarks() {
 function clearInputs() {
   siteNameInput.value = "";
   siteUrlInput.value = "";
+  siteNameInput.classList.remove("is-invalid", "is-valid");
+  siteUrlInput.classList.remove("is-invalid", "is-valid");
 }
 
 function deleteBookmark(index) {
@@ -72,6 +121,6 @@ function deleteBookmark(index) {
   displayBookmarks();
 }
 
-function visitBookmark(i) {
-  window.open(bookmarkList[i].url, "_blank");
+function visitBookmark(index) {
+  window.open(bookmarkList[index].url, "_blank");
 }

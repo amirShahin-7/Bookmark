@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="auther" content="Amir Shahin" />
     <title>Bookmark</title>
     <!-- ===== Fonts ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,6 +16,8 @@
     <link rel="icon" href="./bookmark.png" />
     <!-- ===== Font Awesome ===== -->
     <link rel="stylesheet" href="./css/all.min.css" />
+    <!-- ===== sweetalert2 ===== -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css" />
     <!-- ===== Bootstrap ===== -->
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
     <!-- ===== Main Style sheet ===== -->
@@ -43,6 +45,7 @@
               Site Name
             </label>
             <input
+              oninput="isValidName(this.value)"
               type="text"
               placeholder="Bookmark Name"
               class="form-control"
@@ -54,6 +57,7 @@
               <i class="fa-solid fa-link me-2"></i>Site URL</label
             >
             <input
+              oninput="isValidURL(this.value)"
               type="url"
               placeholder="Website URL"
               class="form-control"
@@ -81,6 +85,8 @@
         </div>
       </section>
     </main>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

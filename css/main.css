@@ -39,7 +39,7 @@ h1:hover::before {
   height: 50%;
 }
 
-h2 {
+.bookmark-body h2 {
   font-family: "Righteous", sans-serif;
   font-size: 1.5625rem;
   background-image: linear-gradient(to right, #3ca55c, #b5ac49);
@@ -48,7 +48,9 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
+h5 {
+  color: red;
+}
 .bookmark-body {
   border-width: 2px 0 2px 0;
   border-style: dotted;
